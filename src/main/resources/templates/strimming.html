@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/strimming/strimming.css}">
+    
+</head>
+<body>
+    <th:block th:replace="~{header :: header}"></th:block>
+    <div class="main">
+        <div class="left">
+            <div class="kind">
+                <p>MY+</p>
+                <p>전체</p>
+                <p>게임</p>
+                <p>보이는라이오</p>
+                <p>스포츠</p>
+            </div>
+            <div class="line"></div>
+            <span class="star-streamer-title">즐겨찾기 스트리머</span>
+            <div class="star-streamer">
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+                <div><label><img src="/strimming/picture/루피.jpg"><span>루피 루피</span></label><div class="live-on"></div></div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="right-header">
+                <div class="serch">
+                    <input type="text">
+                    <div class="delete-icon">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="serch-icon">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div class="right-menu">
+                    <div class="live-icon" th:onclick="|location.href='onair/@{${session.nickname}}/live'|" >
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="alarm">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <div class="all-menu">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="live-list" th:each="room : ${roomList}">
+                <div class="live" id="${room.roomId}" th:onclick="|location.href='onair/@{${room.roomId}}/live'|">
+                    <img src="/strimming/picture/루피.jpg" class="thumbnail">
+                    <div class="live-info">
+                        <img src="/strimming/picture/루피.jpg" class="live-picture">
+                        <div class="info">
+                            <div>
+                                <div class="live-setting">
+                                    <span class="streamer-name">루피 루피</span>
+                                    <div></div>
+                                    <img src="/strimming/picture/human.png">
+                                    <span>20</span>
+                                </div>
+                                <span class="live-title">방송 테스트중입니다</span>
+                            </div>
+                            <div class="live-tag">
+                                <span>#ss</span>
+                                <span>#ss</span>
+                                <span>#ss</span>
+                                <span>#ss</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="strimming/strimming.js"></script>
+</html>
+
+
+

@@ -1,0 +1,47 @@
+.main{
+    display: flex;
+}
+
+.left{
+    width: 250px;
+    margin-left:30px;
+}
+.left p{
+    cursor: pointer;
+}
+
+.right .tetris{
+    display: flex;
+    position: relative;
+}
+.right .tetris table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid black;
+}
+
+.right .tetris table tr td{
+    width: 22px;
+    height: 22px;
+    border: 1px dashed black;
+}
+
+.right .tetris canvas{
+    position: fixed;
+}
+
+.right .tetris .new-blok{
+    height: 150px;
+}
+
+.right .sdoku{
+}
+
+.right .Baduk{
+}
+
+.right .concave{
+}
+
+.right .Seotda{
+}

@@ -1,0 +1,383 @@
+
+        .main{
+            margin-top: 20px;
+            display: flex;
+        }
+        .left{
+            width: 190px;
+            min-width: 196px;
+            margin-right: 100px;
+        }
+
+        .left .star-streamer-title{
+            margin-left: 30px;
+        }
+
+        .left .kind{
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+        .left .kind p{
+            color: #eeeeee;
+            font-size: 17px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .left .line{
+            padding-left: 30px;
+            height: 1px;
+            width: 100%;
+            background-color: #393939;
+            margin-bottom: 15px;
+        }
+
+        .left .star-streamer{
+            margin-top: 15px;
+        }
+
+        .left .star-streamer div:not(.live-on){
+            display: flex;
+            align-self: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 10px 5px 10px 30px;
+            border-radius: 5px;
+        }
+        .left .star-streamer div:hover{
+            background-color: #393939;
+        }
+        .left .star-streamer img{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .left .star-streamer label{
+            color: #eeeeee;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+        }
+        .left .star-streamer label span{
+            padding-top: 3px;
+        }
+        .left .star-streamer div .live-on{
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            background-color: red;
+            margin: 0px;
+            cursor: pointer;
+            align-self: center;
+            float: right;
+        }
+
+        .right{
+            width: 100%;
+            margin-right: 100px;
+        }
+        .right .right-header{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-width: 1280px;
+        }
+        .right .right-header .serch{
+            display: flex;
+            height: 46px;
+            align-items: center;
+            border-radius: 1.5rem;
+            width: 390px;
+            background-color: #000;
+            border: 1px solid #333;
+        }
+        .right .right-header input{
+            display: flex;
+            height: 40px;
+            width: 100%;
+            background-color: transparent;
+            border: 0px;
+            color: #eeeeee;
+            outline: 0px;
+            margin-left: 17px;
+        }
+        .right .right-header .delete-icon{
+            position: relative;
+            margin-right: 7px;
+        }
+        .right .right-header .delete-icon div:nth-child(1){
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            background-color: gray;
+        }
+        .right .right-header .delete-icon div:nth-child(2){
+            position: absolute;
+            border-radius: 50%;
+            background-color: #eeeeee;
+            width: 12px;
+            height: 1px;
+            transform: rotate(45deg);
+            left: 5px;
+            top: 10px;
+        }
+        .right .right-header .delete-icon div:nth-child(3){
+            position: absolute;
+            border-radius: 50%;
+            background-color: #eeeeee;
+            width: 12px;
+            height: 1px;
+            transform: rotate(135deg);
+            left: 5px;
+            top: 10px;
+        }
+        .right .right-header .serch-icon{
+            position: relative;
+            margin-right: 15px;
+        }
+        .right .right-header .serch-icon div:first-child{
+            border-radius: 50%;
+            border: 1px solid #eeeeee;
+            width: 14px;
+            height: 14px;
+        }
+        .right .right-header .serch-icon div:last-child{
+            position: absolute;
+            border-radius: 50%;
+            background-color: #eeeeee;
+            width: 7px;
+            height: 1px;
+            transform: rotate(45deg);
+            left: 13px;
+        }
+
+        .right .right-header .right-menu{
+            display: flex;
+            position: absolute;
+            right: 30px;
+        }
+        .right .right-header .live-icon{
+            position: relative;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .right .right-header .live-icon:hover{
+            background-color: #393939;
+        }
+        .right .right-header .live-icon div:nth-child(1){
+            border: 1px solid #bbb6b6;
+            width: 20px;
+            height: 15px;
+            border-radius: 5px;
+            position: absolute;
+            top: 9px;
+            left: 4px;
+        }
+        .right .right-header .live-icon div:nth-child(2){
+            position: absolute;
+            background-color: #bbb6b6;
+            transform: rotate(20deg);
+            width: 6px;
+            height: 1px;
+            top: 21px;
+            left: 25px;
+        }
+        .right .right-header .live-icon div:nth-child(3){
+            position: absolute;
+            background-color: #bbb6b6;
+            transform: rotate(90deg);
+            width: 11px;
+            height: 1px;
+            top: 17px;
+            left: 25px;
+        }
+        .right .right-header .live-icon div:nth-child(4){
+            position: absolute;
+            background-color: #bbb6b6;
+            transform: rotate(-20deg);
+            width: 5px;
+            height: 1px;
+            top: 13px;
+            left: 25px;
+        }
+
+        .right .right-header .live-icon div:nth-child(5){
+            position: absolute;
+            background-color: #bbb6b6;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            top: 16px;
+            left: 9px;
+        }
+        .right .right-header .live-icon div:nth-child(6){
+            position: absolute;
+            background-color: #bbb6b6;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            top: 16px;
+            left: 17px;
+        }
+        .right .right-header .alarm{
+            position: relative;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .right .right-header .alarm:hover {
+            background-color: #393939;
+        }
+
+        .right .right-header .alarm div:nth-child(1){
+            border-radius: 50%;
+            position: absolute;
+            border: 1px solid #bbb6b6;
+            width: 15px;
+            height: 15px;
+            top: 5px;
+            left: 9px;
+        }
+
+        .right .right-header .alarm div:nth-child(2){
+            border-radius: 50%;
+            position: absolute;
+            border: 1px solid #bbb6b6;
+            width: 7px;
+            height: 7px;
+            top: 19px;
+            left: 13px;
+        }
+        .right .right-header .alarm div:nth-child(3){
+            border: 1px solid #bbb6b6;
+            border-top: none;
+            position: absolute;
+            width: 15px;
+            height: 7px;
+            top:15px;
+            left:9px;
+            background-color: #121213;
+        }
+        .right .right-header .alarm:hover div:nth-child(3){
+            background-color: #393939;
+        }
+
+
+        .right .right-header .all-menu{
+            position: relative;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .right .right-header .all-menu:hover{
+            background-color: #393939;
+        }
+        .right .right-header .all-menu div{
+            position: absolute;
+            background-color: #7398ff;
+            border-radius: 50%;
+            width: 9px;
+            height: 9px;
+        }
+
+        .right .right-header .all-menu div:nth-child(1){
+            top: 9px;
+            left: 8px;
+        }
+        .right .right-header .all-menu div:nth-child(2){
+            top: 9px;
+            left: 23px;
+        }
+        .right .right-header .all-menu div:nth-child(3){
+            top: 22px;
+            left: 8px;
+        }
+        .right .right-header .all-menu div:nth-child(4){
+            top: 22px;
+            left: 23px;
+        }
+        .right .live-list{
+            margin-top: 50px;
+            display: flex;
+            width: 100%;
+            min-width: 1280px;
+        }
+        .right .live-list .live{
+            margin: 0px 10px;
+            max-width: 25%;
+        }
+        .right .live-list .live .thumbnail{
+            width: 100%;
+            border-radius: 10px;
+        }
+        .right .live-list .live .live-picture{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .right .live-list .live .live-info{
+            display: flex;
+        }
+
+        .right .live-list .live .info .live-setting {
+            display: flex;
+            color: #eeeeee;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .right .live-list .live .info .live-setting .streamer-name{
+            margin-right: 5px;
+            cursor: pointer
+        }
+
+        .right .live-list .live .info .live-setting div{
+            width: 3px;
+            height: 3px;
+            background-color: #7f7f7f;
+            border-radius: 50%;
+            cursor: pointer
+        }
+        .right .live-list .live .info .live-setting img{
+            width: 18px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        .right .live-list .live .info .live-setting span:not(.streamer-name){
+            color: #7f7f7f;
+            cursor: pointer
+        }
+        .right .live-list .live .info .live-title{
+            color: #eeeeee;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .right .live-list .live .info .live-tag{
+            font-weight: 100;
+            color: #777;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .right .live-list .live .info .live-tag span{
+            margin: 0px 5px;
+            background: #282828;
+            padding: 2px;
+            border-radius: 5px;
+        }
+        .right .live-list .live .info .live-tag span:hover{
+            background: #444444;
+        }

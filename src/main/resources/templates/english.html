@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/english/english.css}">
+
+</head>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+<div class="main">
+    <div class="left">
+        <nav>
+            <ul class="tree">
+                <li>
+                    <input type="checkbox" id="tree-sub1">
+                    <label for="tree-sub1">vocabulary</label>
+                    <ul>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="tree">
+                <li>
+                    <input type="checkbox" id="tree-sub2">
+                    <label for="tree-sub2">season</label>
+                    <ul class="video-folder-list"></ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="right">
+        <div class="vocabulary">
+            <img>
+            <p>
+                <input type="text">
+                <span class="check">확인</span>
+                <span class="result">결과 : </span>
+                <span class="result2"></span>
+            </p>
+        </div>
+        <div class="season">
+            <video type='video/x-matroska; codecs="theora, vorbis"' controls>
+<!--                <track kind="subtitles" default src="english/video/S01 Season 01/S01E01.vtt" srclang="en" label="english">-->
+            </video>
+            <div class="video-list"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="english/english.js"></script>
+</html>
+
+
+

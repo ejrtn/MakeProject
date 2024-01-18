@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <style>
+        .main{
+            display:flex;
+            margin-left: 50px;
+            margin-tio: 50px;
+        }
+
+        .main .my-picture{
+            height:250px;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+    <th:block th:replace="~{header :: header}"></th:block>
+    <div class="main">
+        <img src="/images/myPicture.jpg" class="my-picture">
+        <div>
+            <p>이름 : 유덕수</p>
+            <p>나이 : 1993년생</p>
+            <p>메일 : dlstn153@naver.com</p>
+            <p>깃헙 : https://github.com/ejrtn</p>
+            <p hidden="hidden">연혁
+            <ul hidden="hidden">
+                <li>
+                    <label>1993</label>
+                    <ul>
+                        <li>출생</li>
+                        <li>장 절제 수술</li>
+                    </ul>
+                </li>
+                <li>
+                    <label>2004</label>
+                    <ul>
+                        <li>담당 제거 수술</li>
+                    </ul>
+                </li>
+                <li>
+                    <label>2012-2015</label>
+                    <ul>
+                        <li>신한대(신흥대) 전자통신학과 - C언어로 첫 프로그래밍 입문</li>
+                    </ul>
+                </li>
+                <li>
+                    <label>2015-2020</label>
+                    <ul>
+                        <li>군복무(산업체)</li>
+                        <li>상록에스 근무(영상 인코딩)</li>
+                        <li>KG아이티뱅크 근무(영업직)</li>
+                        <li>학원을 통해 프로그래밍 공부 다시 시작</li>
+                    </ul>
+                </li>
+                <li>
+                    <label>2021-2023</label>
+                    <ul>
+                        <li>크론병으로 인한 수술(2021년)</li>
+                        <li>어니컴 근무</li>
+                    </ul>
+                </li>
+            </ul>
+            </p>
+        </div>
+        <div>
+            <label>프로젝트</label>
+            <ul>
+                <li>
+                    <label class="company">어니컴(주)</label>
+                    <ul>
+                        <li>
+                            <label>회사내 솔루션(ankus 고도화) 개발</label>
+                            <p>스킬 : java, Spring Boot, JPA, QueryDSL, Postgresql, jdbc</p>
+                            <p>워크플로우, 파일관리, DB조회</p>
+                            <p>결과물 : 회사내 분석가 사용할 수 있도록 오픈, wiki 작성(https://wikidocs.net/book/9594)-메뉴얼</p>
+                        </li>
+                        <li>
+                            <label>map 시각화</label>
+                            <p>스킬 : node.js, react, mySQL</p>
+                            <p>오픈소스 kepler.gl를 활용하여 map 데이터 시각화</p>
+                            <p>결과물 : 설치 및 사용 메뉴얼 작성</p>
+                        </li>
+                        <li>
+                            <label>환경공한 분석 환경 구성 및 분석가 서포팅</label>
+                            <p>스킬 : pyhton, oracle, postgreSQL, exasol</p>
+                            <p>분석 환경 만들기, 배치 개발, 분석 쿼리 작성</p>
+                            <p>결과물 : 배치 결과 로그 스샷</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

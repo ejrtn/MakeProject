@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/strimming/onair.css}">
+
+</head>
+<body>
+    <th:block th:replace="~{header :: header}"></th:block>
+    <div class="main">
+        <div class="left" >
+            <video class="live" autoplay="true"></video>
+        </div>
+        <div class="right">
+            <div class="chatting_list">
+            </div>
+            <div class="write">
+                <div id="write_area" class="write_area" contenteditable="true" ondragenter="return false;" ondrop="return false;" ondragover="return false;" ></div>
+                <label>확인</label>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script th:inline="javascript">
+    let video = document.querySelector(".live");
+    let videoMediaStream = null;
+    if(navigator.mediaDevices.getUserMedia){
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(function(stream){
+                video.srcObject = stream;
+            })
+            .catch(function(error){
+                console.log("Something went wrong!")
+            })
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script th:inline="javascript">
+    let roomId = [[${room.roomId}]]
+    let key = { 'shift': 0, 'enter': 0 }
+    document.querySelector(".write_area").addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return; // 이미 이벤트가 실행되는 중이라면 아무 동작도 하지 않습니다.
+        }
+        if (event.keyCode === 16) { key['shift'] = 1 }
+        if (event.keyCode === 13 && key['shift'] === 0) {
+            sendMsg()
+            // 두 번 동작하는 것을 막기 위해 기본 동작을 취소합니다.
+            event.preventDefault();
+        }
+    })
+    document.querySelector(".write_area").addEventListener("keyup", function (event) {
+        if (event.defaultPrevented) {
+            return; // 이미 이벤트가 실행되는 중이라면 아무 동작도 하지 않습니다.
+        }
+        if (event.keyCode === 16) { key['shift'] = 0 }
+    })
+
+
+
+
+
+    let socket = new SockJS("/ws/chat");
+
+    function enterRoom(socket){
+        let enterMsg={"type" : "ENTER","roomId":[[${room.roomId}]],"sender":roomId,"message":""}; //sender는  글쓸때 수정하자.
+        socket.send(JSON.stringify(enterMsg));
+    }
+    socket.onopen = function (e) {
+        console.log('open server!')
+        enterRoom(socket);
+    };
+    socket.onclose=function(e){
+        console.log('disconnet');
+    }
+    socket.onerror = function (e){
+        console.log(e);
+    }
+    //메세지 수신했을 때 이벤트.
+    socket.onmessage = function (e) {
+        console.log(e.data)
+        data = JSON.parse(e.data)
+        let t = ''
+        t += '<div class="chatting">'
+        t += '<img src="/strimming/picture/피카츄.jpg">'
+        t += '<span class="nickname">'+data.sender+' : </span>'
+        t += '<span>' + data.message + '</span>'
+        t += '</div>'
+        const chatting_list = document.querySelector(".chatting_list");
+        chatting_list.innerHTML += t
+        chatting_list.scrollTop = chatting_list.scrollHeight
+    }
+    //메세지 보내기 버튼 눌렀을 떄..
+    function sendMsg() {
+        let content=document.querySelector(".write_area").innerHTML;
+        let talkMsg={"type" : "TALK","roomId":[[${room.roomId}]] ,"sender":roomId,"message":content};
+        socket.send(JSON.stringify(talkMsg));
+        document.querySelector(".write_area").textContent = '';
+    }
+    function quit(){
+        let quitMsg={"type" : "QUIT","roomId":[[${room.roomId}]] ,"sender":roomId,"message":""};
+        socket.send(JSON.stringify(quitMsg));
+        socket.close();
+        location.href="/chat/chatList";
+    }
+</script>
+</html>

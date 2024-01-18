@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/login.css}">
+</head>
+<body>
+<div class="main">
+    <p>deoksu</p>
+    <input type="text" class="nickname" placeholder="아이디">
+    <label></label>
+    <input type="text" class="pw" placeholder="비밀번호">
+    <label></label>
+    <div class="result">
+        <button onclick="location.href='/'" class="cancel">취소</button>
+        <button class="ok">확인</button>
+    </div>
+</div>
+</body>
+<script src="login.js"></script>
+</html>

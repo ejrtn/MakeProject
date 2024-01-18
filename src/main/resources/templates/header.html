@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<header class="header" th:fragment="header">
+    <div class="logo">
+        <label onclick="location.href='/'">deoksu</label>
+    </div>
+    <div class="menu">
+        <a href="/english">ENGLISH</a>
+        <a href="/game">GAME</a>
+        <a href="/strimming">STRIMMING</a>
+        <div class="my" >
+            <div th:style="${session.nickname != null ? 'display:block' : 'display:none'}" class="picture" ><img src="/strimming/picture/루피.jpg"></div>
+            <div class="name" th:style="${session.nickname != null ? 'display:flex' : 'display:none'}">
+                <label th:text="${session.nickname}">몽키D.Luffy</label>
+                <div></div>
+                <div></div>
+            </div>
+            <div th:style="${session.nickname == null ? 'display:block' : 'display:none'}" class="no-login" onclick="location.href='/login'">로그인</div>
+        </div>
+    </div>
+</header>
+</html>

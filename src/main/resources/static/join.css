@@ -1,0 +1,46 @@
+.main{
+    width: 420px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    margin: 0 auto;
+}
+p{
+    font-size: 50px;
+    align-self: center;
+    font-weight: bold;
+}
+
+spen{
+    margin-bottom: 5px;
+}
+
+input{
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+    outline: 1px;
+    padding: 0px 0px 0px 15px;
+    font-size: 17px;
+    background-color: #121213;
+    color: #eeeeee;
+}
+
+label{
+    margin-bottom: 20px;
+}
+
+.result{
+    display:flex;
+    justify-content: space-between;
+}
+
+button{
+    font-size: 17px;
+    background-color: #121213;
+    color: #eeeeee;
+    border: 1px solid #eeeeee;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+}

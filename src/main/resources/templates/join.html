@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/join.css}">
+</head>
+<body>
+    <div class="main">
+        <p>deoksu</p>
+        <spen>닉네임</spen>
+        <input type="text" class="nickname">
+        <label></label>
+        <spen>비밀번호</spen>
+        <input type="text" class="pw">
+        <label></label>
+        <spen>비밀번호 재확인</spen>
+        <input type="text" class="pwd">
+        <label></label>
+        <div class="result">
+            <button onclick="location.href='/'" class="cancel">취소</button>
+            <button class="ok">확인</button>
+        </div>
+    </div>
+    <form action="userSave" method="post" hidden>
+        <input type="text" id="pw" name="pw">
+        <input type="text" id="nickname" name="nickname">
+    </form>
+</body>
+<script src="join.js"></script>
+</html>

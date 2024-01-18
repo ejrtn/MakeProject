@@ -1,0 +1,94 @@
+body{
+    display: flex;
+    flex-flow: column;
+}
+.main{
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+}
+.left{
+    flex-grow: 1;
+    padding-bottom:20px;
+    padding-right:10px;
+}
+.left .live{
+    height:100%;
+    float:right;
+}
+.right{
+    width: 300px;
+    display: flex;
+    flex-flow: column;
+    margin-right: 10px;
+}
+.right .chatting_list{
+    flex-grow: 1;
+    /* border: 1px solid #eeeeee; */
+    margin-top: 20px;
+    padding: 10px;
+    overflow-y: auto;
+}
+.right .chatting_list::-webkit-scrollbar {
+    width: 10px;
+}
+.right .chatting_list::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+}
+.right .chatting_list::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+.right .chatting_list .chatting{
+    word-break: break-all;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.right .chatting_list .chatting .nickname{
+    margin-right: 5px;
+    color: #979797;
+}
+.right .chatting_list .chatting img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.right .write{
+    display: flex;
+    margin: 20px 0px;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    align-items: center;
+}
+.right .write .write_area{
+    height: 40px;
+    padding: 10px 10px 10px 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+    margin-right: 10px;
+    outline: 0px;
+}
+.right .write .write_area::-webkit-scrollbar {
+    width: 10px;
+}
+.right .write .write_area::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+}
+.right .write .write_area::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+.right .write label{
+    cursor: pointer;
+    margin-right: 10px;
+    flex-shrink: 0;
+}

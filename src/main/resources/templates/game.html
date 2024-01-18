@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{common :: common}"></th:block>
+    <link rel="stylesheet" th:href="@{/game/game.css}">
+</head>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+<div class="main">
+    <div class="left">
+        <p>테트리스</p>
+        <p>스도쿠</p>
+        <p>바둑</p>
+        <p>오목</p>
+        <p>섯다</p>
+    </div>
+    <div class="right">
+        <div class="tetris">
+        </div>
+        <div class="sdoku"></div>
+        <div class="Baduk"></div>
+        <div class="concave"></div>
+        <div class="Seotda"></div>
+    </div>
+</div>
+</body>
+
+</html>
+
+
+
