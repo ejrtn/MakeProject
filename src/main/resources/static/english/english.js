@@ -105,6 +105,7 @@ function englishVideoFileList(path){
 
 function englishVideo(path){
     document.querySelector("video").src=encodeURI("/englishVideo/"+folderClick+"/"+path)
+    document.querySelector("video track").src=encodeURI("/englishSubtitle/"+folderClick+"/"+path)
 }
 
 

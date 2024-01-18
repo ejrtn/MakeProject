@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -57,4 +58,9 @@ public class ControllerEnglish {
         return new ByteArrayResource(FileCopyUtils.copyToByteArray(new FileInputStream("D:\\애니\\심슨\\"+path1+"\\"+path2)));
     }
 
+    @GetMapping(path = "/englishSubtitle/{path1}/{path2}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseBody
+    public Resource englishSubtitle(@PathVariable String path1, @PathVariable String path2) throws IOException {
+        return new ByteArrayResource(FileCopyUtils.copyToByteArray(new FileInputStream("D:\\애니\\심슨\\"+path1+"\\subtitles\\"+path2.replace(".mkv",".vtt"))));
+    }
 }
