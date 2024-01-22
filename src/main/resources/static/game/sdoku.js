@@ -1,6 +1,12 @@
 let sdoku_data = []
 
 $(function(){
+    document.addEventListener("click",function(e){
+        if(e.target.className != "write_area" && document.querySelectorAll(".write_area").length > 0){
+            document.querySelector(".write_area").remove()
+        }
+
+    })
     document.querySelector(".sdoku-start").addEventListener("click",function(){
         let empty_number = document.querySelector(".empty-number").value;
         if(empty_number >= 10 && empty_number <= 70){
@@ -24,8 +30,11 @@ $(function(){
     document.querySelector(".sdoku-reset").addEventListener("click",function(){sdoku_ui()})
 
     document.querySelector(".sdoku table").addEventListener("click",function(e){
+
         if(e.target.nodeName==="TD" && e.target.className === "no_click"){
+
             e.target.innerHTML = '<input type="text" class="write_area">'
+            document.querySelector(".write_area").addEventListener("change",function(){duplicationCheck(this)})
             document.querySelector(".write_area").addEventListener("keyup", function (event) {
 
                 if (event.defaultPrevented) {
@@ -90,12 +99,7 @@ function duplicationCheck(e){
         }
         result.push(r)
     }
-    console.log({
-                            'result' : result,
-                            'x' : parseInt(yx[1]),
-                            'y' : parseInt(yx[0]),
-                            'num' : parseInt(e.value)
-                        },)
+
     $.ajax({
         url: "duplication_check",
         type: "POST",

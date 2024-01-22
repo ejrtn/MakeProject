@@ -29,6 +29,6 @@ public class ControllerGame {
     @PostMapping("duplication_check")
     @ResponseBody
     public boolean duplicationCheck(DuplicationCheckDto duplicationCheckDto){
-        return sdokuService.duplicationCheck(duplicationCheckDto.getResult(),duplicationCheckDto.getX(),duplicationCheckDto.getY(),duplicationCheckDto.getNum());
+        return sdokuService.duplicationCheck(duplicationCheckDto.getResult(),Integer.parseInt(duplicationCheckDto.getX().toString()),Integer.parseInt(duplicationCheckDto.getY().toString()),Integer.parseInt(duplicationCheckDto.getNum().toString()));
     }
 }

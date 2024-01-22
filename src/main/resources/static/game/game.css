@@ -14,35 +14,42 @@
 
 .right .tetris{
     display: flex;
-    position: relative;
 }
 
-.right .tetris td{
+.right .tetris .tetris_blocks{
+    position: relative;
+    margin-right: 20px;
+    width: 475px;
+}
+.right .tetris .tetris-conf p{
+    font-weight: bold;
+    cursor: pointer;
+}
+.right .tetris .tetris-conf span{
+    font-weight: bold;
+}
+
+.right .tetris .tetris_blocks td{
     color:rgba(0, 0, 0, 0);
 }
 
-.right .tetris .new-blok{
+.right .tetris .tetris_blocks .new-blok{
     position: absolute;
     z-index: 9999;
 }
 
-.right .tetris .old-bloktd{
+.right .tetris .tetris_blocks .old-blok{
     position: absolute;
 }
 
-.right .tetris table{
+.right .tetris .tetris_blocks table{
     width: 475px;
     height: 775px;
     border-collapse: collapse;
     border-spacing: 0;
 }
-.right .tetris table tr td{
-    text-align: center;
+.right .tetris .tetris_blocks table tr td{
     border: 1px solid #eeeeee;
-    color: rgba(0, 0, 0, 1);
-}
-.right .tetris .blok-color{
-    background-color: var(--blok-color);
 }
 
 .right .sdoku{

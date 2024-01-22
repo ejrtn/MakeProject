@@ -1,7 +1,7 @@
 let bloks = {
     1:{
         1:[[0,0],[0,1],[1,0],[1,1]],
-        'color':"#000000"
+        'color':"#ffffff"
     },
     2:{
         1:[[0,1],[0,2],[0,3],[0,4]],
@@ -48,6 +48,12 @@ let down_ing = true
 let speed = 500
 let level_max = 5
 let level = 1
+let random;       // 블록 랜덤생성 하기 위한 값
+let intervalID;
+let size = 25;
+let move_y = 0;
+let move_x = 9;
+let blok_turn = 1;
 
 function create_array(){
     let result = []
@@ -66,41 +72,23 @@ function create_array(){
     return result;
 }
 
-array = create_array();
-
-for(let y=0;y<34;y++){
-    a = []
-    for(let x=0;x<20;x++){
-        if( (x === 0 || x === 19) || y === 33 ){
-            a.push({'data':1,'color':'#ffffff'})
-        }else{
-            a.push({'data':0,'color':'#ffffff'})
-        }
-    }
-    array_background.push(a);
-}
-
 function create_table(color){
     let t = ''
     for(let y=1;y<33;y++){
         t += '<tr>'
         for(let x=1;x<19;x++){
             if(array[y][x] === 1){
-                t += '<td style="background-color:'+color+'">'+array[y][x]+'</td>'
+                t += '<td style="background-color:'+color+'"> </td>'
             }else{
-                t += '<td>'+array[y][x]+'</td>'
+                t += '<td> </td>'
             }
         }
         t += '</tr>'
     }
     return t
 }
-
-
-let size = 25;
-let move_y = 0;
-let move_x = 9;
-let blok_turn = 1;
+array = create_array();
+document.querySelector('.new-blok').innerHTML=create_table("#121213") // 초기화
 
 
 function blok_move(ran,x,y,c,k) {
@@ -139,22 +127,45 @@ function blok_move(ran,x,y,c,k) {
 }
 
 
-let random = Math.floor(Math.random() * (7 - 1 + 1) + 1);       // 블록 랜덤생성 하기 위한 값
-document.querySelector('.old-blok').innerHTML=create_table(bloks[random]['color']) // 초기화
 
-let intervalID = setInterval(function(){
-    blok_move(random,move_x,move_y+1,blok_turn,'down');
-    level += 1
-    if(level < 20){
-        speed = 500
-    }else if(level < 40){
-        speed = 400
-    }else if(level < 60){
-        speed = 300
-    }else{
-        speed = 200
+
+
+
+function tetris_start(){
+    intervalID = setInterval(function(){
+        blok_move(random,move_x,move_y+1,blok_turn,'down');
+        level += 1
+        if(level < 20){
+            speed = 500
+        }else if(level < 40){
+            speed = 400
+        }else if(level < 60){
+            speed = 300
+        }else{
+            speed = 200
+        }
+    }, speed);
+}
+
+document.querySelector(".tetris_start").addEventListener("click",function(){
+    random = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+
+    array = create_array();
+    document.querySelector('.old-blok').innerHTML=create_table(bloks[random]['color']) // 초기화
+    for(let y=0;y<34;y++){
+        a = []
+        for(let x=0;x<20;x++){
+            if( (x === 0 || x === 19) || y === 33 ){
+                a.push({'data':1,'color':'#ffffff'})
+            }else{
+                a.push({'data':0,'color':'#ffffff'})
+            }
+        }
+        array_background.push(a);
     }
-}, speed);
+
+    tetris_start();
+})
 
 window.addEventListener("keyup", function (event) {
     if (event.defaultPrevented) {
@@ -289,9 +300,9 @@ function blok_save(key,x,y,c){
         t += '<tr>'
         for(let x=1;x<19;x++){
             if(array_background[y][x]['data']==1){
-                t += '<td style="background-color:'+array_background[y][x]['color']+'">'+array_background[y][x]['data']+'</td>'
+                t += '<td style="background-color:'+array_background[y][x]['color']+'"> </td>'
             }else{
-                t += '<td style="background-color:white">'+array_background[y][x]['data']+'</td>'
+                t += '<td> </td>'
             }
         }
         t += '</tr>'
@@ -443,5 +454,6 @@ function line_clear(){
             if(y < array[0] || y > array[array.length-1]) new_array_background.push(array_background[y]);
         }
         array_background = new_array_background
+        document.querySelector(".line-cnt").textContent = parseInt(document.querySelector(".line-cnt").textContent) + array.length
     }
 }

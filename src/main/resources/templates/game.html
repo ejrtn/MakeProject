@@ -17,13 +17,17 @@
         <p>섯다</p>
     </div>
     <div class="right">
-        <div class="tetris" style="display: none;">
-            <!-- <canvas id="tetrisBackground" width="475" height="775"></canvas>
-            <canvas id="tetris" width="475" height="775"></canvas> -->
-            <table class="new-blok" style="margin-right: 10px;"><tbody></tbody></table>
-            <table class="old-blok"><tbody></tbody></table>
+        <div class="tetris" >
+            <div class="tetris_blocks">
+                <table class="new-blok"><tbody></tbody></table>
+                <table class="old-blok"><tbody></tbody></table>
+            </div>
+            <div class="tetris-conf">
+                <p class="tetris_start">START</p>
+                <span>라인제거 수 : </span><span class="line-cnt">0</span>
+            </div>
         </div>
-        <div class="sdoku">
+        <div class="sdoku" style="display: none;">
             <table>
                 <tr>
                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -66,6 +70,7 @@
     </div>
 </div>
 </body>
+<script src="game/tetris.js"></script>
 <script src="game/sdoku.js"></script>
 </html>
 
