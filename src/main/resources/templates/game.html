@@ -17,16 +17,56 @@
         <p>섯다</p>
     </div>
     <div class="right">
-        <div class="tetris">
+        <div class="tetris" style="display: none;">
+            <!-- <canvas id="tetrisBackground" width="475" height="775"></canvas>
+            <canvas id="tetris" width="475" height="775"></canvas> -->
+            <table class="new-blok" style="margin-right: 10px;"><tbody></tbody></table>
+            <table class="old-blok"><tbody></tbody></table>
         </div>
-        <div class="sdoku"></div>
+        <div class="sdoku">
+            <table>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
+            <div>
+                <input type="number" placeholder="숫자 10 ~ 70" class="empty-number">
+                <div class="sdoku-btn">
+                    <span class="sdoku-start">START</span><span class="sdoku-reset">RESET</span>
+                </div>
+            </div>
+        </div>
         <div class="Baduk"></div>
         <div class="concave"></div>
         <div class="Seotda"></div>
     </div>
 </div>
 </body>
-
+<script src="game/sdoku.js"></script>
 </html>
 
 
