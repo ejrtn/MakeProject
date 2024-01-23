@@ -2,18 +2,18 @@ let sdoku_data = []
 
 $(function(){
     document.addEventListener("click",function(e){
-        if(e.target.className != "write_area" && document.querySelectorAll(".write_area").length > 0){
-            document.querySelector(".write_area").remove()
+        if(e.target.className != "sdoku_write" && document.querySelectorAll(".sdoku_write").length > 0){
+            document.querySelector(".sdoku_write").remove()
         }
 
     })
     document.querySelector(".sdoku-start").addEventListener("click",function(){
-        let empty_number = document.querySelector(".empty-number").value;
+        let empty_number = document.querySelector(".sdoku-empty-number").value;
         if(empty_number >= 10 && empty_number <= 70){
             $.ajax({
                 url: "sdoku_start",
                 type: "POST",
-                data:{empty:document.querySelector(".empty-number").value},
+                data:{empty:document.querySelector(".sdoku-empty-number").value},
                 success: function (success) {
                     sdoku_data = success
                     sdoku_ui();
@@ -33,9 +33,9 @@ $(function(){
 
         if(e.target.nodeName==="TD" && e.target.className === "no_click"){
 
-            e.target.innerHTML = '<input type="text" class="write_area">'
-            document.querySelector(".write_area").addEventListener("change",function(){duplicationCheck(this)})
-            document.querySelector(".write_area").addEventListener("keyup", function (event) {
+            e.target.innerHTML = '<input type="text" class="sdoku_write">'
+            document.querySelector(".sdoku_write").addEventListener("change",function(){duplicationCheck(this)})
+            document.querySelector(".sdoku_write").addEventListener("keyup", function (event) {
 
                 if (event.defaultPrevented) {
                     return; // 이미 이벤트가 실행되는 중이라면 아무 동작도 하지 않습니다.
@@ -115,7 +115,7 @@ function duplicationCheck(e){
             }else{
                 e.parentNode.style.color = '#ff0000'
             }
-            document.querySelector(".write_area").parentNode.innerHTML = e.value
+            document.querySelector(".sdoku_write").parentNode.innerHTML = e.value
         },
         error: function (error) {
             console.log(error)

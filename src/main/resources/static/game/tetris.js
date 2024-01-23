@@ -1,3 +1,5 @@
+let page_click = 'tetris'
+
 let bloks = {
     1:{
         1:[[0,0],[0,1],[1,0],[1,1]],
@@ -126,12 +128,7 @@ function blok_move(ran,x,y,c,k) {
     return result
 }
 
-
-
-
-
-
-function tetris_start(){
+function tetris_loop(){
     intervalID = setInterval(function(){
         blok_move(random,move_x,move_y+1,blok_turn,'down');
         level += 1
@@ -164,7 +161,7 @@ document.querySelector(".tetris_start").addEventListener("click",function(){
         array_background.push(a);
     }
 
-    tetris_start();
+    tetris_loop();
 })
 
 window.addEventListener("keyup", function (event) {
@@ -177,19 +174,7 @@ window.addEventListener("keyup", function (event) {
         case "ArrowDown":
             // "아래 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록이 밑으로 빨리 내려오기
-            intervalID = setInterval(function(){
-                blok_move(random,move_x,move_y+1,blok_turn,'down');
-                level += 1
-                if(level < 20){
-                    speed = 500
-                }else if(level < 40){
-                    speed = 400
-                }else if(level < 60){
-                    speed = 300
-                }else{
-                    speed = 200
-                }
-            }, speed);
+            if(page_click === 'tetris') tetris_loop();
             break;
         default:
             return; // 키 이벤트를 처리하지 않는다면 종료합니다.
@@ -209,45 +194,50 @@ window.addEventListener("keydown", function (event) {
         case "ArrowDown":
             // "아래 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록이 밑으로 빨리 내려오기
-            clearInterval(intervalID)
-            blok_move(random,move_x,move_y+1,blok_turn,'down');
+            if(page_click === 'tetris'){
+                clearInterval(intervalID)
+                blok_move(random,move_x,move_y+1,blok_turn,'down');
+            }
+
             break;
         case "Up": // IE/Edge에서 사용되는 값
         case "ArrowUp":
             // "위 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록 시계방향으로 회전
-            blok_move(random,move_x,move_y,blok_turn+1,'up');
+            if(page_click === 'tetris') blok_move(random,move_x,move_y,blok_turn+1,'up');
             break;
         case "Left": // IE/Edge에서 사용되는 값
         case "ArrowLeft":
             // "왼쪽 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록 왼쪽으로 이동
-            blok_move(random,move_x-1,move_y,blok_turn,'left')
+            if(page_click === 'tetris') blok_move(random,move_x-1,move_y,blok_turn,'left')
             break;
         case "Right": // IE/Edge에서 사용되는 값
         case "ArrowRight":
             // "오른쪽 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록 오른쪽으로 이동
-            blok_move(random,move_x+1,move_y,blok_turn,'right')
+            if(page_click === 'tetris') blok_move(random,move_x+1,move_y,blok_turn,'right')
             break;
         case "Space":
         case " ":
-            while(1){
-                let result = null;
-                if(random==1) result = clash_check(random,move_x,move_y+1,1,'down');
-                if(random == 2 || random == 3 || random == 4) result = clash_check(random,move_x,move_y+1,blok_turn%2+1,'down');
-                if(random == 5 || random == 6 || random == 7) result = clash_check(random,move_x,move_y+1,blok_turn,'down');
+            if(page_click === 'tetris'){
+                while(1){
+                    let result = null;
+                    if(random==1) result = clash_check(random,move_x,move_y+1,1,'down');
+                    if(random == 2 || random == 3 || random == 4) result = clash_check(random,move_x,move_y+1,blok_turn%2+1,'down');
+                    if(random == 5 || random == 6 || random == 7) result = clash_check(random,move_x,move_y+1,blok_turn,'down');
 
-                if(result === 1){
-                    move_y += 1
-                }
+                    if(result === 1){
+                        move_y += 1
+                    }
 
-                if(result === -1){
-                    blok_move(random,move_x,move_y,blok_turn,'space')
-                    break;
-                }
-                if(result === 0){
-                    break;
+                    if(result === -1){
+                        blok_move(random,move_x,move_y,blok_turn,'space')
+                        break;
+                    }
+                    if(result === 0){
+                        break;
+                    }
                 }
             }
             break;
