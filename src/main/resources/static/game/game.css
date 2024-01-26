@@ -119,6 +119,7 @@
 }
 
 .right .baduk{
+    display: flex;
 }
 
 .right .baduk table{
@@ -126,6 +127,7 @@
     height: 518px;
     background-image: url(/game/baduk.png);
     padding: 5px;
+    margin-right: 20px;
 }
 .right .baduk table td{
     cursor: pointer;
@@ -153,6 +155,22 @@
     border-radius: 50%;
     height: 18px;
 }
+.right .baduk .baduk_die p{
+    background-color: #f5c574;
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    align-items: center;
+}
+.right .baduk .baduk_die p img{
+    width:16px;
+    margin-right: 5px;
+}
+.right .baduk .baduk_die p span{
+    color: black;
+    margin-right: 5px;
+}
 
 .right .concave{
 
@@ -163,6 +181,7 @@
     height: 518px;
     background-image: url(/game/baduk.png);
     padding: 5px;
+    margin-right: 20px;
 }
 .right .concave table td{
     cursor: pointer;

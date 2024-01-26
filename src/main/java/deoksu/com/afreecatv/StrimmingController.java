@@ -32,9 +32,6 @@ public class StrimmingController {
         return "strimming";
     }
 
-    @PostMapping("asd")
-    public void asd(@RequestParam Object object){
-    }
 
     @GetMapping("onair/{nickname}/live")
     public String strimmingLive(Model model, @PathVariable String nickname){

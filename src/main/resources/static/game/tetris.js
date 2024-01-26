@@ -1,4 +1,4 @@
-let page_click = 'tetris'
+
 
 let bloks = {
     1:{
@@ -56,6 +56,18 @@ let size = 25;
 let move_y = 0;
 let move_x = 9;
 let blok_turn = 1;
+
+for(let y=0;y<34;y++){
+    a = []
+    for(let x=0;x<20;x++){
+        if( (x === 0 || x === 19) || y === 33 ){
+            a.push({'data':1,'color':'#ffffff'})
+        }else{
+            a.push({'data':0,'color':'#ffffff'})
+        }
+    }
+    array_background.push(a);
+}
 
 function create_array(){
     let result = []
@@ -146,9 +158,12 @@ function tetris_loop(){
 
 document.querySelector(".tetris_start").addEventListener("click",function(){
     random = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    speed = 500;
+    move_y = 0;
+    move_x = 9;
 
     array = create_array();
-    document.querySelector('.old-blok').innerHTML=create_table(bloks[random]['color']) // 초기화
+    array_background = [];
     for(let y=0;y<34;y++){
         a = []
         for(let x=0;x<20;x++){
@@ -160,7 +175,7 @@ document.querySelector(".tetris_start").addEventListener("click",function(){
         }
         array_background.push(a);
     }
-
+    document.querySelector('.old-blok').innerHTML=create_table(bloks[random]['color']) // 초기화
     tetris_loop();
 })
 
@@ -285,6 +300,12 @@ function blok_save(key,x,y,c){
 
     line_clear()
     
+    background_ui();
+    down_ing = true
+}
+
+// 백그라운드 ui 생성
+function background_ui(){
     t = ''
     for(let y=1;y<33;y++){
         t += '<tr>'
@@ -298,7 +319,6 @@ function blok_save(key,x,y,c){
         t += '</tr>'
     }
     document.querySelector('.old-blok').innerHTML=t
-    down_ing = true
 }
 
 function clash_check(key,x,y,c,k){
@@ -410,7 +430,7 @@ function line_clear(){
     }
 
 
-    let array = []
+    let s_array = []
     for(let y=1;y<33;y++){
         let c = 0
         for(let x=1;x<19;x++){
@@ -419,7 +439,7 @@ function line_clear(){
             }
         }
         if(c === 18){
-            array.push(y)
+            s_array.push(y)
             for(let x=1;x<19;x++){
                 if(array_background[y][x]['data'] === 1){
                     array_background[y][x]['data'] = 0
@@ -429,9 +449,9 @@ function line_clear(){
         }
     }
 
-    if(array.length>0){
+    if(s_array.length>0){
         let new_array_background = []
-        for(let y=0;y<array.length;y++){
+        for(let y=0;y<s_array.length;y++){
             a = []
             for(let x=0;x<20;x++){
                 if(x===0 || x===19) a.push({'data':1,'color':'#ffffff'})
@@ -441,9 +461,44 @@ function line_clear(){
         }
         
         for(let y=0;y<34;y++){
-            if(y < array[0] || y > array[array.length-1]) new_array_background.push(array_background[y]);
+            if(y < s_array[0] || y > s_array[s_array.length-1]) new_array_background.push(array_background[y]);
         }
         array_background = new_array_background
-        document.querySelector(".line-cnt").textContent = parseInt(document.querySelector(".line-cnt").textContent) + array.length
+        document.querySelector(".line-cnt").textContent = parseInt(document.querySelector(".line-cnt").textContent) + s_array.length
+        console.log(array_background)
+        tetris_send(s_array)
     }
+}
+
+function tetris_send(content){
+
+    result = ""
+    for(let c=0;c<content.length;c++){
+        let s_array = []
+        let r = []
+        for(let i=0;i<20;i++){
+            r.push(1)
+        }
+        for(let i=0;i<5;i++){
+            let ran = Math.floor(Math.random() * 18) + 1
+            let ch = 1
+            for(let a=0;a<s_array.length;a++){
+                if(s_array[a] == ran){
+                    ch = 0;
+                }
+            }
+            if(ch == 1){
+                s_array.push(ran)
+                r[ran] = 0
+            }else{
+                i--;
+            }
+        }
+        result += JSON.stringify(r)+"/"
+    }
+
+
+
+    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":JSON.stringify(result)};
+    socket.send(JSON.stringify(talkMsg));
 }
