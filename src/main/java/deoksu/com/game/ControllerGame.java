@@ -23,7 +23,7 @@ public class ControllerGame {
     private ChatService chatService;
 
     @GetMapping("game")
-    public String game(Model model, @RequestParam(required = false) String nickname){
+    public String game(Model model, HttpSession httpSession){
         if(chatService.findRoomById("tetris") == null) {        // live 시작
             chatService.createRoom("tetris");
         }
@@ -49,7 +49,7 @@ public class ControllerGame {
         model.addAttribute("seotda",seotda);
 
 
-        model.addAttribute("nickname",nickname == null ? "test" : nickname);
+        model.addAttribute("nickname",httpSession.getAttribute("nickname") == null ? "test" : httpSession.getAttribute("nickname"));
         return "game";
     }
 

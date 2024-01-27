@@ -5,9 +5,11 @@
     <title>Title</title>
     <th:block th:replace="~{common :: common}"></th:block>
     <link rel="stylesheet" th:href="@{/game/game.css}">
+    <link rel="stylesheet" th:href="@{/game/modal.css}">
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
     <script th:inline="javascript">
         let page_click = 'tetris'
+        let tetris_ing = false;
         let roomIds = {
             [[${tetris.roomId}]]:[[${tetris.roomId}]],
             [[${sdoku.roomId}]]:[[${sdoku.roomId}]],
@@ -88,12 +90,28 @@
         <div class="seotda" style="display: none;"></div>
     </div>
 </div>
+<div class="tetris_modal" style="display: none;">
+    <div>
+        <span>start tetris? </span><span class="tetris_cnt">(0/0)</span>
+        <p><span class="tetris_ok">ok</span><span class="tetris_no">no</span></p>
+    </div>
+</div>
 </body>
 <script src="game/tetris.js"></script>
 <script src="game/sdoku.js"></script>
 <script src="game/baduk.js"></script>
 <script src="game/concave.js"></script>
 <script th:inline="javascript">
+
+window.addEventListener('beforeunload', (event) => {
+  // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+  // event.preventDefault();  // 변경 사항이 적용되지 않습니다 경고창 뜸
+
+  quit();
+
+  // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
+  event.returnValue = '';
+});
 
 let socket = new SockJS("/ws/chat");
 
@@ -116,23 +134,42 @@ socket.onerror = function (e){
 socket.onmessage = function (e) {
     let data = JSON.parse(e.data)
     let new_array_background = []
-    if(page_click === data['roomId']) {
-        let d = data['message'].replaceAll('"','').replaceAll("[","").replaceAll("]","").split("/")
 
-        for(let i=d.length-2;i<array_background.length-2;i++){
-            new_array_background.push(array_background[i])
+    if(data['message'].includes('start tetris?')){
+    document.querySelector(".tetris_modal p").style.display = "flex"
+        document.querySelector(".tetris_cnt").textContent = data['message'].split(" ")[2]
+        document.querySelector(".tetris_modal").style.display = 'flex'
+    }
+    if(data['message'] === 'tetris ok'){
+        document.querySelector(".tetris_cnt").textContent = " ("+(parseInt(document.querySelector(".tetris_cnt").textContent.split("/")[0].split("(")[1])+1)+"/"+document.querySelector(".tetris_cnt").textContent.split("/")[1]
+        if(parseInt(document.querySelector(".tetris_cnt").textContent.split("/")[0].split("(")[1]) == parseInt(document.querySelector(".tetris_cnt").textContent.split("/")[1].split(")")[0])){
+            document.querySelector(".tetris_modal").style.display = 'none'
+            tetris_start();
         }
-        for(let i=0;i<d.length-1;i++){
-            dd = []
-            for(let z=0;z<d[i].split(",").length;z++){
-                dd.push({"data":d[i].split(",")[z],"color":"#9e9e9e"})
+    }
+    if(data['message'] === 'tetris no'){
+        document.querySelector(".tetris_cnt").textContent = "(0/0)"
+        document.querySelector(".tetris_modal").style.display = 'none'
+    }
+    if(page_click === data['roomId']) {
+        if(data['sender'] != nickname && data['message'].includes("line_clear")){
+            let d = data['message'].replaceAll("line_clear","").replaceAll('"','').replaceAll("[","").replaceAll("]","").split("/")
+
+            for(let i=d.length-2;i<array_background.length-2;i++){
+                new_array_background.push(array_background[i])
             }
-            new_array_background.push(dd)
+            for(let i=0;i<d.length-1;i++){
+                dd = []
+                for(let z=0;z<d[i].split(",").length;z++){
+                    dd.push({"data":parseInt(d[i].split(",")[z]),"color":"#9e9e9e"})
+                }
+                new_array_background.push(dd)
+            }
+            new_array_background.push(array_background[array_background.length-1])
+            array_background = new_array_background
+            console.log(array_background)
+            background_ui()
         }
-        new_array_background.push(array_background[array_background.length-1])
-        console.log(new_array_background)
-        array_background = new_array_background
-        background_ui()
     }
 }
 

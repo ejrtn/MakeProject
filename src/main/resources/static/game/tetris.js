@@ -1,5 +1,4 @@
 
-
 let bloks = {
     1:{
         1:[[0,0],[0,1],[1,0],[1,1]],
@@ -156,7 +155,7 @@ function tetris_loop(){
     }, speed);
 }
 
-document.querySelector(".tetris_start").addEventListener("click",function(){
+function tetris_start(){
     random = Math.floor(Math.random() * (7 - 1 + 1) + 1);
     speed = 500;
     move_y = 0;
@@ -177,6 +176,13 @@ document.querySelector(".tetris_start").addEventListener("click",function(){
     }
     document.querySelector('.old-blok').innerHTML=create_table(bloks[random]['color']) // 초기화
     tetris_loop();
+}
+
+document.querySelector(".tetris_start").addEventListener("click",function(){
+    if(!tetris_ing){
+        let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":"start tetris?"};
+        socket.send(JSON.stringify(talkMsg));
+    }
 })
 
 window.addEventListener("keyup", function (event) {
@@ -465,7 +471,6 @@ function line_clear(){
         }
         array_background = new_array_background
         document.querySelector(".line-cnt").textContent = parseInt(document.querySelector(".line-cnt").textContent) + s_array.length
-        console.log(array_background)
         tetris_send(s_array)
     }
 }
@@ -499,6 +504,16 @@ function tetris_send(content){
 
 
 
-    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":JSON.stringify(result)};
+    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":JSON.stringify(result)+"line_clear"};
     socket.send(JSON.stringify(talkMsg));
 }
+
+document.querySelector(".tetris_ok").addEventListener("click",function(){
+    document.querySelector(".tetris_modal p").style.display = "none"
+    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":"tetris ok"};
+    socket.send(JSON.stringify(talkMsg));
+})
+document.querySelector(".tetris_no").addEventListener("click",function(){
+    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":"tetris no"};
+    socket.send(JSON.stringify(talkMsg));
+})
