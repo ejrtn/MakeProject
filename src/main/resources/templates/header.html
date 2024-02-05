@@ -2,13 +2,20 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<header class="header" th:fragment="header">
+<header th:fragment="header">
     <div class="logo">
         <label onclick="location.href='/'">deoksu</label>
     </div>
     <div class="menu">
         <a href="/english">ENGLISH</a>
-        <a href="/game">GAME</a>
+        <div class="game">
+            <button onclick="location.href='/tetris'">GAME ▼</button>
+            <div class="game-content">
+                <p onclick="location.href='/tetris'">Tetris</p>
+                <p onclick="location.href='/sdoku'">Sdoku</p>
+                <p onclick="location.href='/baduk'">Bduk</p>
+            </div>
+        </div>
         <a href="/strimming">STRIMMING</a>
         <div class="my" >
             <div th:style="${session.nickname != null ? 'display:block' : 'display:none'}" class="picture" ><img src="/strimming/picture/루피.jpg"></div>

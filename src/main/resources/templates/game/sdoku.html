@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <th:block th:replace="~{common :: common}"></th:block>
+  <link rel="stylesheet" th:href="@{/game/sdoku.css}">
+</head>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+<div class="main">
+  <div class="sdoku" >
+    <table>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+
+    </table>
+    <div>
+      <input type="number" placeholder="숫자 10 ~ 70" class="sdoku-empty-number">
+      <div class="sdoku-btn">
+        <span class="sdoku-start">START</span><span class="sdoku-reset">RESET</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="game/sdoku.js"></script>
+
+</html>
+
+
+

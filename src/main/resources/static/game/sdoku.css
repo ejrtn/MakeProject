@@ -1,0 +1,70 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+.sdoku{
+    display: flex;
+    color: #eeeeee;
+}
+.sdoku table{
+    border-spacing: 0px;
+    border-collapse: separate;
+    margin-right: 20px;
+}
+.sdoku table tr td{
+    border: 1px solid #777722;
+    width: 55px;
+    height: 55px;
+    font-size: 30px;
+    text-align: center;
+}
+.sdoku table tr:nth-child(1) td{
+    border-top: 2px solid #eeeeee;
+}
+.sdoku table tr td:nth-child(10n+1){
+    border-left: 2px solid #eeeeee;
+}
+.sdoku table tr:nth-child(3) td{
+    border-bottom: 2px solid #eeeeee;
+}
+.sdoku table tr:nth-child(6) td{
+    border-bottom: 2px solid #eeeeee;
+}
+.sdoku table tr:nth-child(9) td{
+    border-bottom: 2px solid #eeeeee;
+}
+.sdoku table tr td:nth-child(3n){
+    border-right: 2px solid #eeeeee;
+}
+.sdoku .sdoku-btn{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+.sdoku .sdoku-btn span{
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+.sdoku input{
+    width: 137px;
+    height: 25px;
+    text-align: center;
+}
+.sdoku input::-webkit-outer-spin-button,
+.sdoku input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.sdoku .sdoku-write{
+    width: 26px;
+    height: 31px;
+    outline: none;
+    border: none;
+    color: #eeeeee;
+    background-color: transparent;
+    font-size: 30px;
+}

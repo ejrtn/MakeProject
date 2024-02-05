@@ -22,35 +22,25 @@ public class ControllerGame {
     @Autowired
     private ChatService chatService;
 
-    @GetMapping("game")
+    @GetMapping("tetris")
     public String game(Model model, HttpSession httpSession){
         if(chatService.findRoomById("tetris") == null) {        // live 시작
             chatService.createRoom("tetris");
         }
-        if(chatService.findRoomById("sdoku") == null) {        // live 시작
-            chatService.createRoom("sdoku");
-        }
-        if(chatService.findRoomById("concave") == null) {        // live 시작
-            chatService.createRoom("concave");
-        }
-        if(chatService.findRoomById("seotda") == null) {        // live 시작
-            chatService.createRoom("seotda");
-        }
         ChatRoom tetris = chatService.findRoomById("tetris");
         model.addAttribute("tetris",tetris);
-
-        ChatRoom sdoku = chatService.findRoomById("sdoku");
-        model.addAttribute("sdoku",sdoku);
-
-        ChatRoom concave = chatService.findRoomById("concave");
-        model.addAttribute("concave",concave);
-
-        ChatRoom seotda = chatService.findRoomById("seotda");
-        model.addAttribute("seotda",seotda);
-
-
         model.addAttribute("nickname",httpSession.getAttribute("nickname") == null ? "test" : httpSession.getAttribute("nickname"));
-        return "game";
+        return "game/tetris";
+    }
+
+    @GetMapping("baduk")
+    public String baduk(){
+        return "game/baduk";
+    }
+
+    @GetMapping("sdoku")
+    public String sdoku(){
+        return "game/sdoku";
     }
 
     @PostMapping("sdoku_start")

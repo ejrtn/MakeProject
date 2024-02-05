@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <th:block th:replace="~{common :: common}"></th:block>
+  <link rel="stylesheet" th:href="@{/game/baduk.css}">
+</head>
+<body>
+<th:block th:replace="~{header :: header}"></th:block>
+<div class="main">
+    <div class="baduk">
+        <table></table>
+        <div class="baduk_die">
+            <p><img src="/game/baduk_black.png"><span>죽은돌 : </span><span class="baduk_die_black">0</span></p>
+            <p><img src="/game/baduk_white.png"><span>죽은돌 : </span><span class="baduk_die_white">0</span></p>
+        </div>
+    </div>
+</div>
+</body>
+<script src="game/baduk.js"></script>
+
+</html>
+
+
+

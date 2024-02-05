@@ -1,0 +1,49 @@
+:root {
+    --baduk-circle-color: black;
+    --concave-circle-color: black;
+}
+
+.main {}
+
+.tetris {
+    display: flex;
+    justify-content: center;
+}
+
+.tetris .tetris_blocks {
+    position: relative;
+    margin-right: 20px;
+    width: 475px;
+}
+
+.tetris .tetris-conf p {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tetris .tetris-conf span {
+    font-weight: bold;
+}
+
+.tetris .tetris_blocks td {
+    color: rgba(0, 0, 0, 0);
+}
+
+.tetris .tetris_blocks .new-blok {
+    position: absolute;
+}
+
+.tetris .tetris_blocks .old-blok {
+    position: absolute;
+}
+
+.tetris .tetris_blocks table {
+    width: 475px;
+    height: 775px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.tetris .tetris_blocks table tr td {
+    border: 1px solid #eeeeee;
+}

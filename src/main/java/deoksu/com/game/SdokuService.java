@@ -47,7 +47,10 @@ public class SdokuService {
         }
 
         List<Integer> rans = new ArrayList<>();
-        for(int n=0;n<empty;n++) {
+
+        int c = 0;
+        while(true){
+
             int ran = random.nextInt(81);
             int ch = 1;
             for (int i = 0; i < rans.size(); i++) {
@@ -58,8 +61,13 @@ public class SdokuService {
             }
             if (ch == 1) {
                 result.get(ran / 9).set(ran % 9, 0);
-            }else {
                 rans.add(ran);
+                c++;
+            }
+
+            if(c == empty){
+                break;
+
             }
         }
 
@@ -77,7 +85,6 @@ public class SdokuService {
     public boolean duplicationCheck(List<List<Integer>> result, int x, int y, int num){
         int x_max = x <= 2 ? 2 : (x <= 5 ? 5 : 8);
         int y_max = y <= 2 ? 2 : (y <= 5 ? 5 : 8);
-
         // 가로
         for(int a=0;a<9;a++){
             if(x!=a){
@@ -86,7 +93,6 @@ public class SdokuService {
                 }
             }
         }
-
         // 네모
         for(int a=x_max-2;a<=x_max;a++){
             for(int b=y_max-2;b<=y_max;b++){
@@ -97,7 +103,6 @@ public class SdokuService {
                 }
             }
         }
-
         // 세로
         for(int b=0;b<9;b++){
             if(y != b){

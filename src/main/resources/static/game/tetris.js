@@ -180,7 +180,7 @@ function tetris_start(){
 
 document.querySelector(".tetris_start").addEventListener("click",function(){
     if(!tetris_ing){
-        let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":"start tetris?"};
+        let talkMsg={"type" : "TALK","roomId":roomId ,"sender":nickname,"message":"start tetris?"};
         socket.send(JSON.stringify(talkMsg));
     }
 })
@@ -195,7 +195,7 @@ window.addEventListener("keyup", function (event) {
         case "ArrowDown":
             // "아래 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록이 밑으로 빨리 내려오기
-            if(page_click === 'tetris') tetris_loop();
+            tetris_loop();
             break;
         default:
             return; // 키 이벤트를 처리하지 않는다면 종료합니다.
@@ -215,50 +215,46 @@ window.addEventListener("keydown", function (event) {
         case "ArrowDown":
             // "아래 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록이 밑으로 빨리 내려오기
-            if(page_click === 'tetris'){
-                clearInterval(intervalID)
-                blok_move(random,move_x,move_y+1,blok_turn,'down');
-            }
+            clearInterval(intervalID)
+            blok_move(random,move_x,move_y+1,blok_turn,'down');
 
             break;
         case "Up": // IE/Edge에서 사용되는 값
         case "ArrowUp":
             // "위 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록 시계방향으로 회전
-            if(page_click === 'tetris') blok_move(random,move_x,move_y,blok_turn+1,'up');
+            blok_move(random,move_x,move_y,blok_turn+1,'up');
             break;
         case "Left": // IE/Edge에서 사용되는 값
         case "ArrowLeft":
             // "왼쪽 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록 왼쪽으로 이동
-            if(page_click === 'tetris') blok_move(random,move_x-1,move_y,blok_turn,'left')
+            blok_move(random,move_x-1,move_y,blok_turn,'left')
             break;
         case "Right": // IE/Edge에서 사용되는 값
         case "ArrowRight":
             // "오른쪽 화살표" 키가 눌렸을 때의 동작입니다.
             // 블록 오른쪽으로 이동
-            if(page_click === 'tetris') blok_move(random,move_x+1,move_y,blok_turn,'right')
+            blok_move(random,move_x+1,move_y,blok_turn,'right')
             break;
         case "Space":
         case " ":
-            if(page_click === 'tetris'){
-                while(1){
-                    let result = null;
-                    if(random==1) result = clash_check(random,move_x,move_y+1,1,'down');
-                    if(random == 2 || random == 3 || random == 4) result = clash_check(random,move_x,move_y+1,blok_turn%2+1,'down');
-                    if(random == 5 || random == 6 || random == 7) result = clash_check(random,move_x,move_y+1,blok_turn,'down');
+            while(1){
+                let result = null;
+                if(random==1) result = clash_check(random,move_x,move_y+1,1,'down');
+                if(random == 2 || random == 3 || random == 4) result = clash_check(random,move_x,move_y+1,blok_turn%2+1,'down');
+                if(random == 5 || random == 6 || random == 7) result = clash_check(random,move_x,move_y+1,blok_turn,'down');
 
-                    if(result === 1){
-                        move_y += 1
-                    }
+                if(result === 1){
+                    move_y += 1
+                }
 
-                    if(result === -1){
-                        blok_move(random,move_x,move_y,blok_turn,'space')
-                        break;
-                    }
-                    if(result === 0){
-                        break;
-                    }
+                if(result === -1){
+                    blok_move(random,move_x,move_y,blok_turn,'space')
+                    break;
+                }
+                if(result === 0){
+                    break;
                 }
             }
             break;
@@ -504,16 +500,16 @@ function tetris_send(content){
 
 
 
-    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":JSON.stringify(result)+"line_clear"};
+    let talkMsg={"type" : "TALK","roomId":roomId ,"sender":nickname,"message":JSON.stringify(result)+"line_clear"};
     socket.send(JSON.stringify(talkMsg));
 }
 
 document.querySelector(".tetris_ok").addEventListener("click",function(){
     document.querySelector(".tetris_modal p").style.display = "none"
-    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":"tetris ok"};
+    let talkMsg={"type" : "TALK","roomId":roomId ,"sender":nickname,"message":"tetris ok"};
     socket.send(JSON.stringify(talkMsg));
 })
 document.querySelector(".tetris_no").addEventListener("click",function(){
-    let talkMsg={"type" : "TALK","roomId":roomIds.tetris ,"sender":nickname,"message":"tetris no"};
+    let talkMsg={"type" : "TALK","roomId":roomId ,"sender":nickname,"message":"tetris no"};
     socket.send(JSON.stringify(talkMsg));
 })
