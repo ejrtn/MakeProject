@@ -1,18 +1,14 @@
-package deoksu.com.afreecatv;
+package deoksu.com.strimming;
 
 import deoksu.com.common.websocket.ChatRoom;
 import deoksu.com.common.websocket.ChatService;
-import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -53,6 +49,16 @@ public class StrimmingController {
         return "onair";
     }
 
+    @PostMapping("/onair_video")
+    @ResponseBody
+    public void onair_video(@RequestParam String fname,@RequestParam int c, @RequestParam MultipartFile file) throws IOException {
+        file.getOriginalFilename();
 
+        // 4. 파일 생성
+        File file1 = new File("C:/Users/Yu/Desktop/onair_video/" + fname);
+        // 5. 서버로 전송
+        file.transferTo(file1);
 
+        strimmingService.ffmpeg_mix(c);
+    }
 }

@@ -1,4 +1,4 @@
-package deoksu.com.afreecatv.model;
+package deoksu.com.strimming.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

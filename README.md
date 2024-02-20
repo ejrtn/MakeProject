@@ -20,11 +20,12 @@ local 환경에 있는 영상을 웹상에서 자막 포함 볼 수 있는 방�
 admin 또는 test 접속을 알리는 “admin님이 입장했습니다.” , “test님이 입장했습니다.” 메시지 표출
 이후 몇 개 채팅 치면서 정상 동작 확인
 
+영상 화면이 표출 및 1초마다 서버에 영상 보내기(ffmpeg로 영상 합치기 성공)
 
 
 
-![image](https://github.com/ejrtn/MakeProject/assets/56781498/9c7658bb-7cb4-46f0-9bcb-38d71a4ebeab)
 
+![img_3.png](img_3.png)
 방송이 시작되면 방송 목록이 보이는 것을 확인
 썸네일 클릭 시 방송으로 진입까지만 기능 개발
 video 스트리밍까지는 아직 미완성
@@ -32,7 +33,5 @@ video 스트리밍까지는 아직 미완성
 
 
 
-![image](https://github.com/ejrtn/MakeProject/assets/56781498/00d2aa3c-1a3f-47cd-bd97-0de8167e8287)
-
-소켓 사용해서 사용자 2명이 할 수 있도록 개발 중(버그 잡는중)
-이밖에 게임도 만들 예정
+![img_2.png](img_2.png)
+2명이서 테트리스 할 수 있도록 개발중

@@ -1,4 +1,4 @@
-package deoksu.com.afreecatv.model;
+package deoksu.com.strimming.model;
 
 import deoksu.com.common.User;
 import jakarta.persistence.*;
@@ -8,34 +8,46 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
 @Setter
-public class StrimmingBlackList {
+@Getter
+public class StrimmingLive {
 
     /**
      * sequence
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int blackListSeq;
+    private int liveSeq;
 
     /**
-     * BJ ID
+     * 유저 ID
      */
     @ManyToOne(fetch = FetchType.LAZY) // 다대일 연관관계 지정
     @JoinColumn(name = "nickname") // TEAM_ID를 외래키로 지정
     private User user;
 
     /**
-     * 생성날짜
+     * 채팅 ID
      */
-    @CreatedDate
-    private LocalDateTime cdate;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chattingId")
+    private StrimmingChatting afreecatvChatting;
 
     /**
-     * 블랙당한 유저 ID
+     * 제목
      */
-    private String blackUserId;
+    private String title;
 
+    /**
+     * 태그
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    private StrimmingTag afreecatvTag;
+
+    /**
+     * 생성 날짜
+     */
+    @CreatedDate
+    private LocalDateTime chattingTime;
 
 }

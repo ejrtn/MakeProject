@@ -1,6 +1,6 @@
-package deoksu.com.afreecatv.repository;
+package deoksu.com.strimming.repository;
 
-import deoksu.com.afreecatv.model.StrimmingChatting;
+import deoksu.com.strimming.model.StrimmingChatting;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

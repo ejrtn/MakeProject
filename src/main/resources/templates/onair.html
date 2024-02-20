@@ -32,11 +32,99 @@
         navigator.mediaDevices.getUserMedia({video: true})
             .then(function(stream){
                 video.srcObject = stream;
+                video.play();
+                videoMediaStream = stream
+
             })
             .catch(function(error){
                 console.log("Something went wrong!")
             })
     }
+
+
+    let videoRecorder = null;
+    let recordedVideoURL = null;
+    let videoBlob = null;
+
+    const VideoCaptureStart = () => {
+        if(navigator.mediaDevices.getUserMedia) {
+            let videoData = [];
+            // 1) MediaStream을 매개변수로 MediaRecorder 생성자를 호출
+            videoRecorder = new MediaRecorder(videoMediaStream, {
+            mimeType: "video/webm; codecs=vp9"
+        });
+        // 2) 전달받는 데이터를 처리하는 이벤트 핸들러 등록
+        videoRecorder.ondataavailable = event => {
+            if(event.data?.size > 0){
+                videoData.push(event.data);
+            }
+        }
+
+        // 3) 녹화 중지 이벤트 핸들러 등록
+        videoRecorder.onstop = () => {
+
+            videoBlob = new Blob(videoData, {type: "video/webm"});
+            recordedVideoURL = window.URL.createObjectURL(videoBlob);
+
+            // 이벤트 실행 시에 서버로 파일 POST
+            // sendAvi(videoBlob);
+        }
+
+        // 4) 녹화 시작
+        videoRecorder.start();
+    }};
+
+    const VideoCaptureEnd = () => {
+        if(videoRecorder){
+            // 5) 녹화 중지
+            videoRecorder.stop();
+            videoRecorder = null;
+        }
+    }
+
+    const sendAvi = (blob,c) => {
+
+        if (blob == null) return;
+        let filename = new Date().toString() + ".avi";
+        const file = new File([blob], filename);
+
+        let fd = new FormData();
+        fd.append("fname", "filename_"+c + ".avi");
+        fd.append("c", parseInt(c));
+        fd.append("file", file);
+
+        $.ajax({
+            url: "/onair_video",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: fd,
+            success: function (data, textStatus) {
+            },
+            error: function (errorMessage) {
+                console.log("Error" + errorMessage);
+            },
+        })
+
+    }
+    setTimeout(()=>{
+        let c = 1;
+        VideoCaptureStart();
+
+        let nIntervId = setInterval(() => {
+
+            VideoCaptureEnd();
+            if(c===20){
+                sendAvi(videoBlob,0);
+                clearInterval(nIntervId);
+            }else{
+                sendAvi(videoBlob,c);
+            }
+            VideoCaptureStart();
+            c+=1
+        },1000)
+    },3000)
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script th:inline="javascript">
@@ -79,7 +167,6 @@
     }
     //메세지 수신했을 때 이벤트.
     socket.onmessage = function (e) {
-        console.log(e.data)
         data = JSON.parse(e.data)
         let t = ''
         t += '<div class="chatting">'
@@ -102,7 +189,18 @@
         let quitMsg={"type" : "QUIT","roomId":[[${room.roomId}]] ,"sender":roomId,"message":""};
         socket.send(JSON.stringify(quitMsg));
         socket.close();
-        location.href="/chat/chatList";
     }
+</script>
+<script th:inline="javascript">
+    window.addEventListener('beforeunload', (event) => {
+        // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+        // event.preventDefault();  // 변경 사항이 적용되지 않습니다 경고창 뜸
+
+        quit();
+        enterRoom(socket);
+        // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
+        event.returnValue = '';
+    });
+
 </script>
 </html>
