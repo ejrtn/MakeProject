@@ -10,8 +10,9 @@
 <body>
     <th:block th:replace="~{header :: header}"></th:block>
     <div class="main">
-        <div class="left" >
+        <div class="left">
             <video class="live" autoplay="true"></video>
+            <img src="/images/cut.png" width="28px" height="28px"/>
         </div>
         <div class="right">
             <div class="chatting_list">
@@ -34,7 +35,7 @@
                 video.srcObject = stream;
                 video.play();
                 videoMediaStream = stream
-
+                VideoCaptureStart();
             })
             .catch(function(error){
                 console.log("Something went wrong!")
@@ -65,7 +66,7 @@
 
             videoBlob = new Blob(videoData, {type: "video/webm"});
             recordedVideoURL = window.URL.createObjectURL(videoBlob);
-
+            sendAvi(recordedVideoURL);
             // 이벤트 실행 시에 서버로 파일 POST
             // sendAvi(videoBlob);
         }
@@ -82,24 +83,13 @@
         }
     }
 
-    const sendAvi = (blob,c) => {
-
-        if (blob == null) return;
-        let filename = new Date().toString() + ".avi";
-        const file = new File([blob], filename);
-
-        let fd = new FormData();
-        fd.append("fname", "filename_"+c + ".avi");
-        fd.append("c", parseInt(c));
-        fd.append("file", file);
-
+    const sendAvi = (url) => {
+        if (url == null) return;
         $.ajax({
             url: "/onair_video",
             type: "POST",
-            contentType: false,
-            processData: false,
-            data: fd,
-            success: function (data, textStatus) {
+            data: {"url":url},
+            success: function (data) {
             },
             error: function (errorMessage) {
                 console.log("Error" + errorMessage);
@@ -107,24 +97,11 @@
         })
 
     }
-    setTimeout(()=>{
-        let c = 1;
-        VideoCaptureStart();
 
-        let nIntervId = setInterval(() => {
-
-            VideoCaptureEnd();
-            if(c===20){
-                sendAvi(videoBlob,0);
-                clearInterval(nIntervId);
-            }else{
-                sendAvi(videoBlob,c);
-            }
-            VideoCaptureStart();
-            c+=1
-        },1000)
-    },3000)
-
+    document.querySelector(".left img").addEventListener("click",function(e) {
+        VideoCaptureEnd();
+        if(!videoRecorder){ VideoCaptureStart(); }
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script th:inline="javascript">

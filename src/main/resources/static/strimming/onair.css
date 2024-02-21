@@ -11,10 +11,17 @@ body{
     flex-grow: 1;
     padding-bottom:20px;
     padding-right:10px;
+    position: relative;
 }
 .left .live{
     height:100%;
     float:right;
+}
+.left img{
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: 13px;
 }
 .right{
     width: 300px;

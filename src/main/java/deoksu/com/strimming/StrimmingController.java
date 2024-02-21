@@ -51,14 +51,13 @@ public class StrimmingController {
 
     @PostMapping("/onair_video")
     @ResponseBody
-    public void onair_video(@RequestParam String fname,@RequestParam int c, @RequestParam MultipartFile file) throws IOException {
-        file.getOriginalFilename();
-
-        // 4. 파일 생성
-        File file1 = new File("C:/Users/Yu/Desktop/onair_video/" + fname);
-        // 5. 서버로 전송
-        file.transferTo(file1);
-
-        strimmingService.ffmpeg_mix(c);
+    public void onair_video(@RequestParam String url) throws IOException {
+        System.out.println(url);
     }
+
+//    @PostMapping("/onair_strimming")
+//    @ResponseBody
+//    public Object onair_strimming(@RequestParam Object object){
+//        return
+//    }
 }
